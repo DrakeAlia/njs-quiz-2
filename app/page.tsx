@@ -1,4 +1,7 @@
 import Link from "next/link";
+import postgres from "postgres";
+
+const sql = postgres(process.env.POSTGRES_URL!);
 
 const quizzes = [
     {
