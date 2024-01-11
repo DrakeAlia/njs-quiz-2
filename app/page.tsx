@@ -1,28 +1,38 @@
 import Link from "next/link";
+import postgres from "postgres";
+import QuizForm from "./quiz-form";
 
-function Quizzes() {
+const sql = postgres(process.env.POSTGRES_URL!);
+
+// type defines the shape of an object or function
+type Quiz = {
+  quiz_id: number;
+  title: string;
+};
+
+// async functions always return a promise
+async function Quizzes() {
+  const quizzes: Quiz[] = await sql`
+  SELECT * FROM quizzes`;
+  
+  // we are returning a list of quizzes
   return (
-    <section>
-      <ul className="underline">
-        <li>
-          <Link href="/quiz/1">Quiz 1</Link>
+    <ul>
+      {quizzes.map((quiz) => (
+        <li key={quiz.quiz_id} className="underline">
+          <Link href={`/quiz/${quiz.quiz_id}`}>{quiz.title}</Link>
         </li>
-        <li>
-          <Link href="/quiz/2">Quiz 2</Link>
-        </li>
-        <li>
-          <Link href="/quiz/3">Quiz 3</Link>
-        </li>
-      </ul>
-    </section>
+      ))}
+    </ul>
   );
 }
-
+//
 export default function Home() {
   return (
-    <div>
-      <h1 className="text-2xl font-bold">All Quizzes</h1>
+    <section className="flex flex-col items-center text-center mt-2 py-5 mx-auto">
+      <h1 className="text-2xl font-bold p-2 mb-4">All Quizzes</h1>
       <Quizzes />
-    </div>
+      <QuizForm />
+    </section>
   );
 }
