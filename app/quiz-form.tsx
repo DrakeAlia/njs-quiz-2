@@ -12,7 +12,7 @@ function Answer({ id }: { id: number }) {
         type="text"
         name={`answer-${id}`}
       />
-      <input type="checkbox" name={`check-${id}`} />
+      <input type="checkbox" name={`checkbox-${id}`} />
     </label>
   );
 }
@@ -30,30 +30,41 @@ export default function QuizForm() {
       };
     });
 
-    console.log({ title, description, question, answers });
-    
     await sql`
-        WITH new_quiz AS (
-            INSERT INTO quizzes (title, description, question_text, created_at)
-            VALUES (${title}, ${description}, ${question}, NOW())
-            RETURNING quiz_id
-            )
-        INSERT INTO answers (quiz_id, answer_text, is_correct)
-        VALUES
-        ((SELECT quiz_id FROM new_quiz), ${answers[0].answer}, ${answers[0].isCorrect}),
-        ((SELECT quiz_id FROM new_quiz), ${answers[1].answer}, ${answers[1].isCorrect}),
-        ((SELECT quiz_id FROM new_quiz), ${answers[2].answer}, ${answers[2].isCorrect})
+      WITH new_quiz AS (
+        INSERT INTO quizzes (title, description, question_text, created_at)
+        VALUES (${title}, ${description}, ${question}, NOW())
+        RETURNING quiz_id
+      )
+      INSERT INTO answers (quiz_id, answer_text, is_correct)
+      VAlUES (
+        (SELECT quiz_id FROM new_quiz),
+        ${answers[0].answer},
+        ${answers[0].isCorrect}
+      ),
+      (
+        (SELECT quiz_id FROM new_quiz),
+        ${answers[1].answer},
+        ${answers[1].isCorrect}
+      ),
+      (
+        (SELECT quiz_id FROM new_quiz),
+        ${answers[2].answer},
+        ${answers[2].isCorrect}
+      )
+      )
     `;
+
     revalidatePath("/");
   }
 
   return (
-    <form className="flex flex-col p-2 mt-8 max-w-xs" action={createQuiz}>
+    <form className="flex flex-col p-2 mt-2 max-w-xs" action={createQuiz}>
       <h3 className="text-lg font-bold text-center">Create Quiz</h3>
       <label className="mt-2">
         Title:
         <input
-          className="bg-gray-500 border-2 border-gray-200 hover:bg-blue-400 rounded p-1 mt-2 w-full"
+          className="bg-gray-500 border-2 border-gray-50 hover:bg-blue-400 p-1 rounded w-full"
           type="text"
           name="title"
         />
