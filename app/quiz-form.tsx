@@ -1,19 +1,20 @@
-import { revalidatePath } from "next/cache";
 import postgres from "postgres";
+import { revalidatePath } from "next/cache";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const sql = postgres(process.env.POSTGRES_URL!);
 
 function Answer({ id }: { id: number }) {
   return (
-    <label>
+    <Label>
       Answer {id}:
-      <input
-        className="bg-gray-500 border-2 border-gray-50 hover:bg-blue-400 p-1 rounded w-full"
-        type="text"
-        name={`answer-${id}`}
-      />
-      <input type="checkbox" name={`checkbox-${id}`} />
-    </label>
+      <Input type="text" name={`answer-${id}`} />
+      {/* <Input type="checkbox" name={`checkbox-${id}`} /> */}
+      <Checkbox name={`checkbox-${id}`} />
+    </Label>
   );
 }
 
@@ -61,40 +62,23 @@ export default function QuizForm() {
   return (
     <form className="flex flex-col p-2 mt-2 max-w-xs" action={createQuiz}>
       <h3 className="text-lg font-bold text-center">Create Quiz</h3>
-      <label className="mt-2">
+      <Label>
         Title:
-        <input
-          className="bg-gray-500 border-2 border-gray-50 hover:bg-blue-400 p-1 rounded w-full"
-          type="text"
-          name="title"
-        />
-      </label>
-      <label className="mt-2">
+        <Input type="text" name="title" />
+      </Label>
+      <Label>
         Description:
-        <input
-          className="bg-gray-500 border-2 border-gray-200 hover:bg-blue-400 rounded p-1 mt-2 w-full"
-          type="text"
-          name="description"
-        />
-      </label>
-      <label className="mt-2">
+        <Input type="text" name="description" />
+      </Label>
+      <Label>
         Question:
-        <input
-          className="bg-gray-500 border-2 border-gray-200 hover:bg-blue-400 rounded p-1 mt-2 w-full"
-          type="text"
-          name="question"
-        />
-      </label>
+        <Input type="text" name="question" />
+      </Label>
       <div className="my-4" />
       <Answer id={1} />
       <Answer id={2} />
       <Answer id={3} />
-      <button
-        type="submit"
-        className="bg-gray-500 border-2 border-gray-200 hover:bg-blue-700 rounded p-2 mt-4 w-full transition-all"
-      >
-        Create Quiz
-      </button>
+      <Button type="submit">Create Quiz</Button>
     </form>
   );
 }

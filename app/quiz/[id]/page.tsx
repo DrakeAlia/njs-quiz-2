@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import postgres from "postgres";
 
@@ -63,9 +64,9 @@ export default function QuizPage({
           redirect(`/quiz/${params.id}?show=true`);
         }}
       >
-        <button className="bg-gray-500 border-2 border-gray-200 hover:bg-blue-700 rounded p-2 mt-8 transition-all">
+        <Button>
           Show Answer
-        </button>
+        </Button>
       </form>
     </section>
   );
