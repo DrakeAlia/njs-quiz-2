@@ -1,17 +1,6 @@
 import Link from "next/link";
 import postgres from "postgres";
 import QuizForm from "./quiz-form";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 
 const sql = postgres(process.env.POSTGRES_URL!);
 
@@ -26,28 +15,13 @@ async function Quizzes() {
   `;
 
   return (
-    <div>
-      <Select>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a Quiz" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Quizzes</SelectLabel>
-            {/* <SelectItem value="apple">Apple</SelectItem>
-            <SelectItem value="banana">Banana</SelectItem>
-            <SelectItem value="blueberry">Blueberry</SelectItem>
-            <SelectItem value="grapes">Grapes</SelectItem>
-            <SelectItem value="pineapple">Pineapple</SelectItem> */}
+    <ul>
       {quizzes.map((quiz) => (
-        <li key={quiz.quiz_id}>
+        <li key={quiz.quiz_id} className="flex flex-col underline">
           <Link href={`/quiz/${quiz.quiz_id}`}>{quiz.title}</Link>
         </li>
       ))}
-      </SelectGroup>
-    </SelectContent>
-  </Select>
-    </div>
+    </ul>
   );
 }
 
