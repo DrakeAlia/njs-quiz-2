@@ -56,31 +56,31 @@ export default function QuizForm() {
       
       return (
         <form
-        className="flex flex-col gap-4 m-5 p-6 justify-between rounded-2xl border-2 border-gray-200"
-        action={createQuiz}
+          className="flex flex-col gap-4 m-5 p-6 justify-between rounded-2xl border-2 border-gray-400"
+          action={createQuiz}
         >
-      <h3 className="text-lg font-bold text-center">Create Quiz</h3>
-      <Label>
-        <Input type="title" placeholder="Title" name="title" />
-      </Label>
-      <Label>
-        <Input
-          type="description"
-          placeholder="Description"
-          name="description"
-          />
-      </Label>
-      <Label>
-        <Input type="text" placeholder="Question" name="question" />
-      </Label>
-      <div className="flex gap-6 py-4">
-        <Answer id={1} />
-        <Answer id={2} />
-        <Answer id={3} />
-      </div>
-      <div className="flex flex-col items-center mx-auto max-w-3xl">
-        <Button type="submit">Create Quiz</Button>
-      </div>
-    </form>
-  );
+          <h3 className="text-lg font-bold text-center">Create Quiz</h3>
+          <Label>
+            <Input type="title" placeholder="Title" name="title" />
+          </Label>
+          <Label>
+            <Input
+              type="description"
+              placeholder="Description"
+              name="description"
+            />
+          </Label>
+          <Label>
+            <Input type="text" placeholder="Question" name="question" />
+          </Label>
+          <div className="flex gap-6 py-4">
+            <Answer id={1} />
+            <Answer id={2} />
+            <Answer id={3} />
+          </div>
+          <div className="flex flex-col items-center mx-auto max-w-3xl">
+            <Button type="submit">Create Quiz</Button>
+          </div>
+        </form>
+      );
 }
