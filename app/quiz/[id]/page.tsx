@@ -43,10 +43,16 @@ async function Quiz({
   `;
 
   return (
-    <div className="flex flex-col text-center items-center mt-4">
-      <h1 className="text-4xl font-bold mb-2">{answers[0].quiz_title}</h1>
-      <p className="text-2xl mb-4 hover:text-blue-500">{answers[0].quiz_description}</p>
-      <p className="text-xl font-semibold mb-8 hover:text-blue-500">{answers[0].quiz_question}</p>
+    <div className="flex flex-col text-center items-center mt-4 ">
+      <h1 className="text-4xl font-bold text-blue-500 mb-2 underline">
+        {answers[0].quiz_title}
+      </h1>
+      <p className="text-2xl mb-4 hover:text-blue-500">
+        {answers[0].quiz_description}
+      </p>
+      <p className="text-xl font-semibold mb-8 hover:text-blue-500">
+        {answers[0].quiz_question}
+      </p>
       <ul>
         {answers.map((answer) => (
           <li key={answer.answer_id}>
@@ -77,7 +83,7 @@ export default function QuizPage({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <CardFooter className="flex justify-between">
+        <CardFooter className="flex flex-col items-center justify-betwee gap-4 m-5 p-6">
           <form
             action={async () => {
               "use server";
@@ -91,77 +97,26 @@ export default function QuizPage({
           <form
             action={async () => {
               "use server";
+              redirect(`/quiz/${params.id}`);
+            }}
+          >
+            <div className="items-center mx-auto max-w-3xl">
+              <Button variant="destructive">Hide Answer</Button>
+            </div>
+          </form>
+          <form
+            action={async () => {
+              "use server";
               redirect("/");
             }}
           >
             <div className="items-center mx-auto max-w-3xl">
-              <Button variant="outline">Go Back</Button>
+              <Button variant="outline">Back to All Quizzes</Button>
             </div>
           </form>
         </CardFooter>
       </CardContent>
-      {/* <section className="flex flex-col items-center gap-4 m-5 p-6 justify-between">
-        <Quiz id={params.id} searchParams={searchParams} />
-        <form
-          action={async () => {
-            "use server";
-            redirect(`/quiz/${params.id}?show=true`);
-          }}
-        >
-          <div className="items-center mx-auto max-w-3xl">
-            <Button>Show Answer</Button>
-          </div>
-        </form>
-        <form
-          action={async () => {
-            "use server";
-            redirect("/");
-          }}
-        >
-          <div className="items-center mx-auto max-w-3xl">
-            <Button>Go Back</Button>
-          </div>
-        </form>
-      </section> */}
     </Card>
   );
 }
 
-// export function CardWithForm() {
-//   return (
-//     <Card className="w-[350px]">
-//       <CardHeader>
-//         <CardTitle>Create project</CardTitle>
-//         <CardDescription>Deploy your new project in one-click.</CardDescription>
-//       </CardHeader>
-//       <CardContent>
-//         <form>
-//           <div className="grid w-full items-center gap-4">
-//             <div className="flex flex-col space-y-1.5">
-//               <Label htmlFor="name">Name</Label>
-//               <Input id="name" placeholder="Name of your project" />
-//             </div>
-//             <div className="flex flex-col space-y-1.5">
-//               <Label htmlFor="framework">Framework</Label>
-//               <Select>
-//                 <SelectTrigger id="framework">
-//                   <SelectValue placeholder="Select" />
-//                 </SelectTrigger>
-//                 <SelectContent position="popper">
-//                   <SelectItem value="next">Next.js</SelectItem>
-//                   <SelectItem value="sveltekit">SvelteKit</SelectItem>
-//                   <SelectItem value="astro">Astro</SelectItem>
-//                   <SelectItem value="nuxt">Nuxt.js</SelectItem>
-//                 </SelectContent>
-//               </Select>
-//             </div>
-//           </div>
-//         </form>
-//       </CardContent>
-//       <CardFooter className="flex justify-between">
-//         <Button variant="outline">Cancel</Button>
-//         <Button>Deploy</Button>
-//       </CardFooter>
-//     </Card>
-//   );
-// }

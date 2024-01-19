@@ -15,7 +15,7 @@ async function Quizzes() {
   `;
 
   return (
-    <ul className="rounded-2xl border-2 border-gray-400 m-2 px-40">
+    <ul className="m-2 px-40">
       {quizzes.map((quiz) => (
         <li
           key={quiz.quiz_id}
@@ -30,8 +30,9 @@ async function Quizzes() {
 
 export default function Home() {
   return (
-    <section className="flex flex-col justify-between items-center rounded-2xl border-2 border-gray-600 m-2 text-center px-40 h-full ">
-      <h1 className="text-2xl font-bold p-4 mb-4">All Quizzes</h1>
+    <section className="flex flex-col items-center text-center m-2 py-24 rounded-2xl border-2 border-gray-600">
+      <h1 className="text-4xl font-bold p-4">Welcome to Quiz App!</h1>
+      <h1 className="text-2xl font-bold p-4 mb-4 text-gray-600">All Created Quizzes:</h1>
       <Quizzes />
       <QuizForm />
     </section>
