@@ -9,14 +9,13 @@ const sql = postgres(process.env.POSTGRES_URL!);
 
 function Answer({ id }: { id: number }) {
   return (
-    <div className="flex w-auto items-center space-x-2">
+    <div className="flex w-full items-center space-x-2">
       <Checkbox name={`check-${id}`} />
       <Label>
         <Input
           type="text"
           placeholder={`Answer ${id}:`}
           name={`answer-${id}`}
-          className="border-gray-700"
         />
       </Label>
     </div>
@@ -56,9 +55,8 @@ export default function QuizForm() {
   }
 
   return (
-    
     <form
-      className="flex flex-col gap-4 m-5 p-6 rounded-2xl border-2 border-gray-400"
+      className="flex flex-col gap-4 m-5 p-6 justify-between rounded-2xl border-2 border-gray-200"
       action={createQuiz}
     >
       <h3 className="text-lg font-bold text-center">Create Quiz</h3>
@@ -67,7 +65,7 @@ export default function QuizForm() {
           type="title"
           placeholder="Title"
           name="title"
-          className="border-gray-700"
+          className="text-gray-600"
         />
       </Label>
       <Label>
@@ -75,7 +73,7 @@ export default function QuizForm() {
           type="description"
           placeholder="Description"
           name="description"
-          className="border-gray-700"
+          className="text-gray-600"
         />
       </Label>
       <Label>
@@ -83,13 +81,13 @@ export default function QuizForm() {
           type="text"
           placeholder="Question"
           name="question"
-          className="border-gray-700"
+          className="text-gray-600"
         />
       </Label>
-      <h1 className="text-md font-bold p-4 text-gray-600">
-        Select a Answer for your Quiz
-      </h1>
-      <div className="flex gap-6 py-4 mt-6">
+      <h3 className="text-md font-bold pt-4 text-gray-600 hover:text-blue-600 ">
+        Select the correct answer for your quiz:
+      </h3>
+      <div className="flex gap-6 py-6 text-gray-600">
         <Answer id={1} />
         <Answer id={2} />
         <Answer id={3} />
