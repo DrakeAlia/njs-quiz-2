@@ -30,7 +30,7 @@ async function Quizzes() {
 
 export default function Home() {
   return (
-    <section className="flex flex-col items-center text-center m-2 py-24 rounded-2xl border-2 border-gray-600">
+    <section className="flex flex-col items-center text-center m-2 py-16 rounded-2xl border-2 border-gray-600">
       <h1 className="text-4xl font-bold p-4">Welcome to Quiz App!</h1>
       <h1 className="text-2xl font-bold p-4 mb-4 text-gray-600">All Created Quizzes:</h1>
       <Quizzes />
